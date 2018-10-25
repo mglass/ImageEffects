@@ -21,13 +21,13 @@ public struct ImageEffects {
     UIBlurEffectStyleProminent NS_ENUM_AVAILABLE_IOS(10_0), // Adapts to user interface style
     */
     
-    public static func blurWithUIKit(style: UIBlurEffectStyle) -> UIView {
+	public static func blurWithUIKit(style: UIBlurEffect.Style) -> UIView {
         let blurEffect = UIBlurEffect(style: style)
         let alphaView = UIVisualEffectView(effect: blurEffect)
         return alphaView
     }
     
-    public static func vibrancyWithUIKit(style: UIBlurEffectStyle) -> UIView {
+	public static func vibrancyWithUIKit(style: UIBlurEffect.Style) -> UIView {
         let blurEffect = UIVibrancyEffect(blurEffect: UIBlurEffect(style: style))
         let alphaView = UIVisualEffectView(effect: blurEffect)
         return alphaView

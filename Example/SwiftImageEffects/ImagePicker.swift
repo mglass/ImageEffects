@@ -14,14 +14,14 @@ import Photos
 #else
 // swift 3 compatibility
 extension AVMediaType {
-    static let video: AVMediaType = AVMediaTypeVideo as AVMediaType
+    static let video: AVMediaType = AVMediaType.video as AVMediaType
 }
 extension AVCaptureDevice {
     class func authorizationStatus(for mediaType: AVMediaType) -> AVAuthorizationStatus {
-        return authorizationStatus(forMediaType: mediaType as String?)
+        return authorizationStatusAVCaptureDevice.authorizationStatus(for: mediaType as String?)
     }
     class func requestAccess(for mediaType: AVMediaType, completionHandler handler: @escaping (Bool) -> Void) {
-        requestAccess(forMediaType: mediaType as String?, completionHandler: handler)
+        requestAccessAVCaptureDevice.requestAccess(for: mediaType as String?, completionHandler: handler)
     }
 }
 #endif
@@ -49,7 +49,7 @@ extension UIImagePickerControllerDelegate where Self : UIViewController, Self : 
     }
     
     /// Prompt the image picker
-    private func pickImage(sourceType: UIImagePickerControllerSourceType) {
+    private func pickImage(sourceType: UIImagePickerController.SourceType) {
         if sourceType == .camera {
             let authorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
             if authorizationStatus == .denied {
@@ -96,7 +96,7 @@ extension UIImagePickerControllerDelegate where Self : UIViewController, Self : 
     }
     
     /// Prompt the user about permissions
-    private func showImagePickerPermissionErrorAlert(sourceType: UIImagePickerControllerSourceType) {
+    private func showImagePickerPermissionErrorAlert(sourceType: UIImagePickerController.SourceType) {
         let title: String
         if sourceType == .camera {
             title = "You didn't grant camera permission."
@@ -107,7 +107,7 @@ extension UIImagePickerControllerDelegate where Self : UIViewController, Self : 
         
         // User has explicitly denied authorization for this application.
         let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
-            UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
+            UIApplication.shared.openURL(URL(string: UIApplication.openSettingsURLString)!)
         }
         alert.addAction(settingsAction)
         
